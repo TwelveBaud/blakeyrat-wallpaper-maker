@@ -13,17 +13,17 @@ using System.Windows.Media.Imaging;
 
 namespace PicMaker
 {
-    public partial class PicMakerForm : Form
-    {
+	public partial class PicMakerForm : Form
+	{
 		private Bitmap m_image = null;
 		private string m_basePath = null;
 		private Thread m_worker = null;
 		private Random m_rand = new Random();
-		
+
 		public PicMakerForm()
-        {
-            InitializeComponent();
-        }
+		{
+			InitializeComponent();
+		}
 
 		private void PicMakerForm_Load(object sender, EventArgs e)
 		{
@@ -39,9 +39,11 @@ namespace PicMaker
 			int xSize = Convert.ToInt32(XSizeField.Text);
 			int ySize = Convert.ToInt32(YSizeField.Text);
 			int seed = m_rand.Next();
-			
+
+			PicMaker p = new PicMaker(xSize, ySize, seed);
+
 			m_image = new Bitmap(xSize, ySize);
-			m_image = PicMaker.CreatePic(xSize, ySize, seed);
+			m_image = p.CreatePicThread();
 			ResultsBox.Image = m_image;
 			LastSeedLabel.Text = Convert.ToString(seed);
 		}
@@ -72,7 +74,7 @@ namespace PicMaker
 				YSizeField.Enabled = false;
 				NumberToSaveField.Enabled = false;
 				DateToSaveField.Enabled = false;
-				
+
 				m_basePath = Path.GetDirectoryName(dialog.FileName);
 
 				m_worker = new Thread(SaveABunchThread);
@@ -91,10 +93,11 @@ namespace PicMaker
 			for (int i = 0; i < Convert.ToInt32(NumberToSaveField.Text); i++)
 			{
 				int seed = m_rand.Next();
-				
+
 				Bitmap thisImage = new Bitmap(xSize, ySize);
-				thisImage = PicMaker.CreatePic(xSize, ySize, seed);
-				LastSeedLabel.Text = Convert.ToString(seed);
+				PicMaker p = new PicMaker(xSize, ySize, seed);
+				thisImage = p.CreatePicThread();
+				//LastSeedLabel.Text = Convert.ToString(seed);
 
 				string filename = m_basePath + Path.DirectorySeparatorChar + currentDate.ToString("yyyyMMdd");
 				thisImage.Save(filename + ".png");
@@ -114,7 +117,7 @@ namespace PicMaker
 		void SaveABunchFinish()
 		{
 			ThreadWatcher.Enabled = false;
-			
+
 			GenerateButton.Enabled = true;
 			SaveButton.Enabled = true;
 			SaveABunchButton.Enabled = true;
@@ -138,12 +141,12 @@ namespace PicMaker
 			return encoding.GetBytes(str);
 		}
 
-		private void WriteSeedData( DateTime generationDate, int seed )
+		private void WriteSeedData(DateTime generationDate, int seed)
 		{
-			
+
 			TextWriter writer = new StreamWriter("data.txt", true);
 			writer.WriteLine(Convert.ToString(generationDate) + "\t" + Convert.ToString(seed));
 			writer.Close();
 		}
-    }
+	}
 }
