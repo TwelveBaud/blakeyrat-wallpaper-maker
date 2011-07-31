@@ -213,11 +213,19 @@ namespace PicMaker
 		{
 			Bitmap pic = new Bitmap(_xSize, _ySize);
 
+			// Correct maxPointValue for fuzz factor
+			_maxPointValue += _maxPointValue * _maxFuzz;
+
 			for (int x = 0; x < pic.Width; x++)
 			{
 				for (int y = 0; y < pic.Height; y++)
 				{
 					double uncorrectedValue = _values[x, y];
+
+					// Apply "fuzz factor"
+					double fuzz = _rand.NextDouble() * _maxFuzz;
+					uncorrectedValue += uncorrectedValue * fuzz;
+
 					double value = (uncorrectedValue - _minPointValue) / (_maxPointValue - _minPointValue);
 
 					Color c = _grad.GetColorAtValue(value);
@@ -262,10 +270,6 @@ namespace PicMaker
 					pointValue += dist * _nexii[z].boost;
 				}
 			}
-
-			// Apply "fuzz factor"
-			double fuzz = _rand.NextDouble() * _maxFuzz;
-			pointValue += pointValue * fuzz;
 
 			return (pointValue);
 		}
