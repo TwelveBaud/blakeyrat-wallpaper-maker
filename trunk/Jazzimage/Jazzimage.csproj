@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C3B46B74-E2DF-4E93-9D23-C563ECB96818}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Jazzimage</RootNamespace>
+    <AssemblyName>Jazzimage</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ColorTransforms\AlterBlue.cs" />
+    <Compile Include="ColorTransforms\AlterGreen.cs" />
+    <Compile Include="ColorTransforms\AlterRed.cs" />
+    <Compile Include="ColorTransforms\Circle.cs" />
+    <Compile Include="ColorTransforms\FuzzAlpha.cs" />
+    <Compile Include="ColorTransforms\GreyscaleX.cs" />
+    <Compile Include="ColorTransforms\GreyscaleY.cs" />
+    <Compile Include="ColorTransforms\HorizontalStripe.cs" />
+    <Compile Include="ColorTransforms\VerticalStripe.cs" />
+    <Compile Include="ColorUtils.cs" />
+    <Compile Include="CoordTransforms\BulgeX.cs" />
+    <Compile Include="CoordTransforms\BulgeY.cs" />
+    <Compile Include="CoordTransforms\Fisheye.cs" />
+    <Compile Include="CoordTransforms\Fuzz.cs" />
+    <Compile Include="CoordTransforms\MoveOrigin.cs" />
+    <Compile Include="CoordTransforms\Rotate.cs" />
+    <Compile Include="CoordTransforms\SineX.cs" />
+    <Compile Include="CoordTransforms\SineY.cs" />
+    <Compile Include="CoordTransforms\Swirl.cs" />
+    <Compile Include="CoordTransforms\TiltX.cs" />
+    <Compile Include="CoordTransforms\TiltY.cs" />
+    <Compile Include="CoordTransforms\ZoomOut.cs" />
+    <Compile Include="JazzImageDefinition.cs" />
+    <Compile Include="JazzimageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JazzimageForm.Designer.cs">
+      <DependentUpon>JazzimageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NumberUtils.cs" />
+    <Compile Include="PointColor.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransformParent.cs" />
+    <EmbeddedResource Include="JazzimageFOrm.resx">
+      <DependentUpon>JazzimageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
