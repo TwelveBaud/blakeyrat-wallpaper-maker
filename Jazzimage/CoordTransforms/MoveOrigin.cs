@@ -7,23 +7,23 @@ namespace Jazzimage
 {
 	public class MoveOrigin : TransformParent
 	{
-		protected double _moveX;
-		protected double _moveY;
-		protected bool _frameX;
-		protected bool _frameY;
+		double _moveX;
+		double _moveY;
+		bool _frameX;
+		bool _frameY;
 
 		public MoveOrigin()
 		{
-			_moveX = NumberUtils.GetRandDouble() - 1.0;
-			_moveY = NumberUtils.GetRandDouble() - 1.0;
+			_moveX = RandomNumberProvider.GetRandDouble() - 1.0;
+			_moveY = RandomNumberProvider.GetRandDouble() - 1.0;
 
 			_frameX = false;
-			if (NumberUtils.GetRandDouble() < 0.5)
+			if (RandomNumberProvider.GetRandDouble() < 0.5)
 			{
 				_frameX = true;
 			}
 			_frameY = false;
-			if (NumberUtils.GetRandDouble() < 0.5)
+			if (RandomNumberProvider.GetRandDouble() < 0.5)
 			{
 				_frameY = true;
 			}

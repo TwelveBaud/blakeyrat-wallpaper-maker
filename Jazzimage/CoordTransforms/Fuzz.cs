@@ -7,17 +7,17 @@ namespace Jazzimage
 {
 	public class Fuzz : TransformParent
 	{
-		protected double _maxAmount;
+		double _maxAmount;
 
 		public Fuzz()
 		{
-			_maxAmount = NumberUtils.GetRandDouble() * 0.05;
+			_maxAmount = RandomNumberProvider.GetRandDouble() * 0.05;
 		}
 
 		public override PointColor Transform(PointColor input)
 		{
-			input.X = input.X + (NumberUtils.GetRandDouble() * _maxAmount);
-			input.Y = input.Y + (NumberUtils.GetRandDouble() * _maxAmount);
+			input.X = input.X + (RandomNumberProvider.GetRandDouble() * _maxAmount);
+			input.Y = input.Y + (RandomNumberProvider.GetRandDouble() * _maxAmount);
 
 			return input;
 		}

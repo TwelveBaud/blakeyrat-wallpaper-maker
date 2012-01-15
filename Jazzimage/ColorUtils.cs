@@ -11,11 +11,11 @@ namespace Jazzimage
 	{
 		static public Color GetRandomColor()
 		{
-			if (NumberUtils.GetRandDouble() < 0.5)
+			if (RandomNumberProvider.GetRandDouble() < 0.5)
 			{
-				if (NumberUtils.GetRandDouble() < 0.5)
+				if (RandomNumberProvider.GetRandDouble() < 0.5)
 				{
-					if (NumberUtils.GetRandDouble() < 0.5)
+					if (RandomNumberProvider.GetRandDouble() < 0.5)
 					{
 						return (Color.White);
 					}
@@ -24,11 +24,11 @@ namespace Jazzimage
 						return (Color.Black);
 					}
 				}
-				int value = NumberUtils.GetRandInt(256);
+				int value = RandomNumberProvider.GetRandInt(256);
 				return (Color.FromArgb(value, value, value));
 			}
 
-			return (Color.FromArgb(NumberUtils.GetRandInt(256), NumberUtils.GetRandInt(256), NumberUtils.GetRandInt(256)));
+			return (Color.FromArgb(RandomNumberProvider.GetRandInt(256), RandomNumberProvider.GetRandInt(256), RandomNumberProvider.GetRandInt(256)));
 		}
 
 		static public Color Combine(Color colorA, Color colorB)

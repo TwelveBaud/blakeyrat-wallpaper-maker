@@ -9,11 +9,11 @@ namespace Jazzimage
 {
     class GreyscaleY : TransformParent
     {
-        protected int _alpha;
+        int _alpha;
 
         public GreyscaleY()
         {
-            _alpha = NumberUtils.GetRandInt(256);
+            _alpha = RandomNumberProvider.GetRandInt(256);
         }
 
         public override PointColor Transform(PointColor input)

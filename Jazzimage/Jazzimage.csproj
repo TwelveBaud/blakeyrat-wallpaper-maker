@@ -75,12 +75,12 @@
     <Compile Include="JazzimageForm.Designer.cs">
       <DependentUpon>JazzimageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NumberUtils.cs" />
+    <Compile Include="RandomNumberProvider.cs" />
     <Compile Include="PointColor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransformParent.cs" />
-    <EmbeddedResource Include="JazzimageFOrm.resx">
+    <EmbeddedResource Include="JazzimageForm.resx">
       <DependentUpon>JazzimageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

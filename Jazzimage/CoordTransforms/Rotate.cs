@@ -11,7 +11,7 @@ namespace Jazzimage
 
 		public Rotate()
 		{
-			_amount = NumberUtils.GetRandDouble() * (2 * Math.PI);
+			_amount = RandomNumberProvider.GetRandDouble() * (2 * Math.PI);
 		}
 		
 		public override PointColor Transform( PointColor input)

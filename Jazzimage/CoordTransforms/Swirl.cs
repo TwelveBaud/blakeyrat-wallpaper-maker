@@ -7,11 +7,11 @@ namespace Jazzimage
 {
 	class Swirl:TransformParent
 	{
-		protected double _amountMultiplier;
+		double _amountMultiplier;
 
 		public Swirl()
 		{
-			_amountMultiplier = NumberUtils.GetRandDouble() * (2 * Math.PI);
+			_amountMultiplier = RandomNumberProvider.GetRandDouble() * (2 * Math.PI);
 		}
 		
 		public override PointColor Transform( PointColor input)

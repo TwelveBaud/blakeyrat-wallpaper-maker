@@ -9,14 +9,14 @@ namespace Jazzimage
 {
 	class Circle : TransformParent
 	{
-		protected double _circleRadius;
-		protected Color _circleColor;
+		double _circleRadius;
+		Color _circleColor;
 
 		public Circle()
 		{
-			_circleRadius = NumberUtils.GetRandDouble();
+			_circleRadius = RandomNumberProvider.GetRandDouble();
 			_circleColor = ColorUtils.GetRandomColor();
-			_circleColor = Color.FromArgb(NumberUtils.GetRandInt(256), _circleColor.R, _circleColor.G, _circleColor.B);
+			_circleColor = Color.FromArgb(RandomNumberProvider.GetRandInt(256), _circleColor.R, _circleColor.G, _circleColor.B);
 		}
 
 		public override PointColor Transform(PointColor input)

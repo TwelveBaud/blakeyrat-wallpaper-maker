@@ -7,11 +7,11 @@ namespace Jazzimage
 {
 	public class SineX : TransformParent
 	{
-		protected double _amount;
+		double _amount;
 
 		public SineX()
 		{
-			_amount = NumberUtils.GetRandDouble() * (2 * Math.PI);
+			_amount = RandomNumberProvider.GetRandDouble() * (2 * Math.PI);
 		}
 
 		public override PointColor Transform(PointColor input)
