@@ -9,14 +9,14 @@ namespace Jazzimage
 {
 	class VerticalStripe : TransformParent
 	{
-		protected double _stripeWidth;
-		protected Color _stripeColor;
+		double _stripeWidth;
+		Color _stripeColor;
 
 		public VerticalStripe()
 		{
-			_stripeWidth = NumberUtils.GetRandDouble() * 0.25;
+			_stripeWidth = RandomNumberProvider.GetRandDouble() * 0.25;
 			_stripeColor = ColorUtils.GetRandomColor();
-			_stripeColor = Color.FromArgb(NumberUtils.GetRandInt(256), _stripeColor.R, _stripeColor.G, _stripeColor.B);
+			_stripeColor = Color.FromArgb(RandomNumberProvider.GetRandInt(256), _stripeColor.R, _stripeColor.G, _stripeColor.B);
 		}
 
 		public override PointColor Transform(PointColor input)

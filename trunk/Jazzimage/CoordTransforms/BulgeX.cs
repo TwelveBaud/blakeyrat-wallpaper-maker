@@ -7,11 +7,11 @@ namespace Jazzimage
 {
 	public class BulgeX : TransformParent
 	{
-		protected double _amount;
+		double _amount;
 
 		public BulgeX()
 		{
-			_amount = NumberUtils.GetRandDouble() * 2.0;
+			_amount = RandomNumberProvider.GetRandDouble() * 2.0;
 		}
 
 		public override PointColor Transform(PointColor input)

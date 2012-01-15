@@ -13,6 +13,11 @@ namespace Jazzimage
 {
 	public partial class JazzimageForm : Form
 	{
+		static int IMAGE_WIDTH = 1920*2;
+		//static int IMAGE_WIDTH = 320;
+		static int IMAGE_HEIGHT = 1080*2;
+		//static int IMAGE_HEIGHT = 240;
+		
 		private JazzImageDefinition _jazzImage;
 		
 		public JazzimageForm()
@@ -22,16 +27,16 @@ namespace Jazzimage
 
 		private void NewImageButton_Click(object sender, EventArgs e)
 		{
-			_jazzImage = new JazzImageDefinition(1920*2, 1080*2);
+			_jazzImage = new JazzImageDefinition(IMAGE_WIDTH, IMAGE_HEIGHT);
 
-			RenderPicture.Image = _jazzImage.GetResultingImageThreaded(false);
+			RenderPicture.Image = _jazzImage.GetResultingImageThreaded();
 		}
 
 		private void NextFrameButton_Click(object sender, EventArgs e)
 		{
 			_jazzImage.NextFrame();
 
-			RenderPicture.Image = _jazzImage.GetResultingImageThreaded(false);
+			RenderPicture.Image = _jazzImage.GetResultingImageThreaded();
 		}
 
 		private void MovieButton_Click(object sender, EventArgs e)
@@ -42,7 +47,7 @@ namespace Jazzimage
 			{
 				frameNum++;
 				_jazzImage.NextFrame();
-				Image frame = _jazzImage.GetResultingImageThreaded(false);
+				Image frame = _jazzImage.GetResultingImageThreaded();
 				frame.Save( "frame_" + FormatInt(frameNum) + ".png", System.Drawing.Imaging.ImageFormat.Png);
 			}
 		}
@@ -79,8 +84,8 @@ namespace Jazzimage
 			while (true)
 			{
 				frameNum++;
-				_jazzImage = new JazzImageDefinition(1920 * 2, 1080 * 2);
-				Image frame = _jazzImage.GetResultingImageThreaded(false);
+				_jazzImage = new JazzImageDefinition(IMAGE_WIDTH, IMAGE_HEIGHT);
+				Image frame = _jazzImage.GetResultingImageThreaded();
 
                 string filename = currentDate.ToString("yyyyMMdd");
 
@@ -96,7 +101,7 @@ namespace Jazzimage
 
 		private void InverseButton_Click(object sender, EventArgs e)
 		{
-			RenderPicture.Image = _jazzImage.GetResultingImageThreaded(true);
+			//RenderPicture.Image = _jazzImage.GetResultingImageThreaded();
 		}
 	}
 }

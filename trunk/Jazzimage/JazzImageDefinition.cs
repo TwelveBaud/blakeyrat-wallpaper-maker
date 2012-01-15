@@ -17,12 +17,8 @@ namespace Jazzimage
 		int _width;
 		int _height;
 
-		bool _inverse;
-
 		Image _threadResults;
 		Graphics _threadGraf;
-
-		Random _rand = new Random();
 
 		public JazzImageDefinition(int width, int height)
 		{
@@ -61,7 +57,7 @@ namespace Jazzimage
 
 		public TransformParent SelectRandomTransform()
 		{
-			double selector = NumberUtils.GetRandDouble() * (NUMBER_OF_COORD_TRANSFORMS + NUMBER_OF_COLOR_TRANSFORMS);
+			double selector = RandomNumberProvider.GetRandDouble() * (NUMBER_OF_COORD_TRANSFORMS + NUMBER_OF_COLOR_TRANSFORMS);
 
 			if (selector < NUMBER_OF_COORD_TRANSFORMS)
 			{
@@ -77,7 +73,7 @@ namespace Jazzimage
 
 		public TransformParent SelectRandomCoordTransform()
 		{
-			int transformSelector = _rand.Next(NUMBER_OF_COORD_TRANSFORMS);
+			int transformSelector = RandomNumberProvider.GetRandInt(NUMBER_OF_COORD_TRANSFORMS);
 			TransformParent transform = new TransformParent();
 
 			switch (transformSelector)
@@ -130,7 +126,7 @@ namespace Jazzimage
 
 		public TransformParent SelectRandomColorTransform()
 		{
-			int transformSelector = _rand.Next(NUMBER_OF_COLOR_TRANSFORMS);
+			int transformSelector = RandomNumberProvider.GetRandInt(NUMBER_OF_COLOR_TRANSFORMS);
 			TransformParent transform = new TransformParent();
 
 			switch (transformSelector)
@@ -170,15 +166,13 @@ namespace Jazzimage
 			return transform;
 		}
 
-		public Image GetResultingImage(bool inverse)
+		public Image GetResultingImage()
 		{
-			_inverse = inverse;
 			return GetImageRect(0, 0, _width, _height);
 		}
 
-		public Image GetResultingImageThreaded(bool inverse)
+		public Image GetResultingImageThreaded()
 		{
-			_inverse = inverse;
 			_threadResults = new Bitmap(_width, _height);
 			_threadGraf = Graphics.FromImage(_threadResults);
 
@@ -224,14 +218,7 @@ namespace Jazzimage
 			{
 				for (int y = 0; y < height; y++)
 				{
-					if (_inverse)
-					{
-						result.SetPixel(x, y, GetColorFromPointInverse(x + left, y + top));
-					}
-					else
-					{
-						result.SetPixel(x, y, GetColorFromPoint(x + left, y + top));
-					}
+					result.SetPixel(x, y, GetColorFromPointAntiAlias(x + left, y + top));
 				}
 			}
 
@@ -259,6 +246,46 @@ namespace Jazzimage
 		{
 			PointColor pc = new PointColor((Convert.ToDouble(x) / _width), (Convert.ToDouble(y) / _height), Color.Transparent);
 
+			return GetColorFromPointColor(pc);
+		}
+
+		public Color GetColorFromPointAntiAlias(int x, int y)
+		{
+			// Let's grab 3 colors, 120 degrees away from the center point, and average the values.
+			double xDouble = Convert.ToDouble(x);
+			double yDouble = Convert.ToDouble(y);
+
+			PointColor pc1 = new PointColor();
+			PointColor pc2 = new PointColor();
+			PointColor pc3 = new PointColor();
+
+			pc1.X = xDouble - 0.5;
+			pc1.Y = yDouble;
+
+			pc2.X = xDouble - 0.25;
+			pc2.Y = yDouble + 0.4330127;
+
+			pc3.X = xDouble - 0.25;
+			pc3.Y = yDouble - 0.4330127;
+
+			Color c1 = GetColorFromPointColor(pc1);
+			Color c2 = GetColorFromPointColor(pc2);
+			Color c3 = GetColorFromPointColor(pc3);
+
+			int aTotal = c1.A + c2.A + c3.A;
+			int rTotal = c1.R + c2.R + c3.R;
+			int gTotal = c1.G + c2.G + c3.G;
+			int bTotal = c1.B + c2.B + c3.B;
+
+			Color result = Color.FromArgb(aTotal / 3, rTotal / 3, gTotal / 3, bTotal / 3);
+
+			return result;
+		}
+
+		public Color GetColorFromPointColor(PointColor pc)
+		{
+			pc.Color = Color.Transparent;
+
 			for (int i = 0; i < _transforms.Count; i++)
 			{
 				pc = _transforms[i].Transform(pc);
@@ -271,7 +298,7 @@ namespace Jazzimage
 
 		public Color GetColorFromPointInverse(int x, int y)
 		{
-			PointColor pc = new PointColor((Convert.ToDouble(x) / _width), (Convert.ToDouble(y) / _height), Color.Black);
+			PointColor pc = new PointColor((Convert.ToDouble(x) / _width), (Convert.ToDouble(y) / _height), Color.Transparent);
 
 			for (int i = _transforms.Count; i > 0; i--)
 			{

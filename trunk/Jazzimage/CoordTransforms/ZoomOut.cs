@@ -7,11 +7,11 @@ namespace Jazzimage
 {
 	class ZoomOut : TransformParent
 	{
-		protected double _amount;
+		double _amount;
 
 		public ZoomOut()
 		{
-			_amount = NumberUtils.GetRandDouble() * 100;
+			_amount = RandomNumberProvider.GetRandDouble() * 100;
 		}
 
 		public override PointColor Transform(PointColor input)

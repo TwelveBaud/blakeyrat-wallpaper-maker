@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Jazzimage
 {
-	static class NumberUtils
+	static class RandomNumberProvider
 	{
 		static Random _rand = new Random();
 

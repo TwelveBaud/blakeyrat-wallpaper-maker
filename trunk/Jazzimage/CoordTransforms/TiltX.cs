@@ -7,11 +7,11 @@ namespace Jazzimage
 {
     class TiltX : TransformParent
     {
-        protected double _amount;
+        double _amount;
         
         public TiltX()
         {
-            _amount = NumberUtils.GetRandDouble();
+            _amount = RandomNumberProvider.GetRandDouble();
         }
 
         public override PointColor Transform(PointColor input)
