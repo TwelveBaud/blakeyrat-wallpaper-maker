@@ -10,7 +10,7 @@ namespace Jazzimage
 {
 	class JazzImageDefinition
 	{
-		const int NUMBER_OF_TRANSFORM_LAYERS = 16;
+		const int NUMBER_OF_TRANSFORM_LAYERS = 12;
 		const int NUMBER_OF_THREADS = 3;
 
 		List<TransformParent> _transforms;
@@ -28,15 +28,17 @@ namespace Jazzimage
 			{
 				//_transforms.Add(SelectRandomTransform());
 
-                if (i % 2 == 0)
-                {
-                    _transforms.Add(SelectRandomCoordTransform());
-                }
-                else
-                {
-                    _transforms.Add(SelectRandomColorTransform());
-                }
+				if (i % 3 == 0)
+				{
+					_transforms.Add(SelectRandomColorTransform());
+				}
+				else
+				{
+					_transforms.Add(SelectRandomCoordTransform());
+				}
 			}
+
+			_transforms.Add(SelectRandomColorTransform());
 
 			// For QAing specific transforms
 			//_transforms.Add(new Swirl());
@@ -105,12 +107,12 @@ namespace Jazzimage
 				case 8:
 					transform = new Swirl();
 					break;
-                case 9:
-                    transform = new TiltX();
-                    break;
-                case 10:
-                    transform = new TiltY();
-                    break;
+				case 9:
+					transform = new TiltX();
+					break;
+				case 10:
+					transform = new TiltY();
+					break;
 				case 11:
 					transform = new ZoomOut();
 					break;
@@ -146,12 +148,12 @@ namespace Jazzimage
 				case 4:
 					transform = new FuzzAlpha();
 					break;
-                case 5:
-                    transform = new GreyscaleX();
-                    break;
-                case 6:
-                    transform = new GreyscaleY();
-                    break;
+				case 5:
+					transform = new GreyscaleX();
+					break;
+				case 6:
+					transform = new GreyscaleY();
+					break;
 				case 7:
 					transform = new HorizontalStripe();
 					break;
@@ -218,7 +220,8 @@ namespace Jazzimage
 			{
 				for (int y = 0; y < height; y++)
 				{
-					result.SetPixel(x, y, GetColorFromPointAntiAlias(x + left, y + top));
+					//result.SetPixel(x, y, GetColorFromPointAntiAlias(x + left, y + top));
+					result.SetPixel(x, y, GetColorFromPoint(x + left, y + top));
 				}
 			}
 
@@ -249,35 +252,42 @@ namespace Jazzimage
 			return GetColorFromPointColor(pc);
 		}
 
+		const int NUMBER_OF_AA_POINTS = 5;
+
 		public Color GetColorFromPointAntiAlias(int x, int y)
 		{
 			// Let's grab 3 colors, 120 degrees away from the center point, and average the values.
 			double xDouble = Convert.ToDouble(x);
 			double yDouble = Convert.ToDouble(y);
 
-			PointColor pc1 = new PointColor();
-			PointColor pc2 = new PointColor();
-			PointColor pc3 = new PointColor();
+			List<Color> colors = new List<Color>();
 
-			pc1.X = xDouble - 0.5;
-			pc1.Y = yDouble;
+			for (int i = 0; i < NUMBER_OF_AA_POINTS; i++)
+			{
+				PointColor pc = new PointColor();
 
-			pc2.X = xDouble - 0.25;
-			pc2.Y = yDouble + 0.4330127;
+				pc.X = xDouble + (RandomNumberProvider.GetRandDouble() - 0.5);
+				pc.Y = yDouble + (RandomNumberProvider.GetRandDouble() - 0.5);
 
-			pc3.X = xDouble - 0.25;
-			pc3.Y = yDouble - 0.4330127;
+				Color c = GetColorFromPointColor(pc);
 
-			Color c1 = GetColorFromPointColor(pc1);
-			Color c2 = GetColorFromPointColor(pc2);
-			Color c3 = GetColorFromPointColor(pc3);
+				colors.Add(c);
+			}
 
-			int aTotal = c1.A + c2.A + c3.A;
-			int rTotal = c1.R + c2.R + c3.R;
-			int gTotal = c1.G + c2.G + c3.G;
-			int bTotal = c1.B + c2.B + c3.B;
+			int aTotal = 0;
+			int rTotal = 0;
+			int gTotal = 0;
+			int bTotal = 0;
 
-			Color result = Color.FromArgb(aTotal / 3, rTotal / 3, gTotal / 3, bTotal / 3);
+			for (int j = 0; j < NUMBER_OF_AA_POINTS; j++)
+			{
+				aTotal += colors[j].A;
+				rTotal += colors[j].R;
+				gTotal += colors[j].G;
+				bTotal += colors[j].B;
+			}
+
+			Color result = Color.FromArgb(aTotal / NUMBER_OF_AA_POINTS, rTotal / NUMBER_OF_AA_POINTS, gTotal / NUMBER_OF_AA_POINTS, bTotal / NUMBER_OF_AA_POINTS);
 
 			return result;
 		}
