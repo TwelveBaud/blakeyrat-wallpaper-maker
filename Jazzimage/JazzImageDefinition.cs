@@ -28,13 +28,13 @@ namespace Jazzimage
 			{
 				//_transforms.Add(SelectRandomTransform());
 
-				if (i % 3 == 0)
+				if (i % 2 == 0)
 				{
-					_transforms.Add(SelectRandomColorTransform());
+					_transforms.Add(SelectRandomTransform());
 				}
 				else
 				{
-					_transforms.Add(SelectRandomCoordTransform());
+					_transforms.Add(new MoveOrigin());
 				}
 			}
 
@@ -71,7 +71,7 @@ namespace Jazzimage
 			}
 		}
 
-		const int NUMBER_OF_COORD_TRANSFORMS = 12;
+		const int NUMBER_OF_COORD_TRANSFORMS = 11;
 
 		public TransformParent SelectRandomCoordTransform()
 		{
@@ -93,27 +93,24 @@ namespace Jazzimage
 					transform = new Fuzz();
 					break;
 				case 4:
-					transform = new MoveOrigin();
-					break;
-				case 5:
 					transform = new Rotate();
 					break;
-				case 6:
+				case 5:
 					transform = new SineX();
 					break;
-				case 7:
+				case 6:
 					transform = new SineY();
 					break;
-				case 8:
+				case 7:
 					transform = new Swirl();
 					break;
-				case 9:
+				case 8:
 					transform = new TiltX();
 					break;
-				case 10:
+				case 9:
 					transform = new TiltY();
 					break;
-				case 11:
+				case 10:
 					transform = new ZoomOut();
 					break;
 				default:
