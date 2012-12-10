@@ -35,14 +35,16 @@
 			this.SaveButton = new System.Windows.Forms.Button();
 			this.SaveBunchButton = new System.Windows.Forms.Button();
 			this.InverseButton = new System.Windows.Forms.Button();
+			this.VoteUpButton = new System.Windows.Forms.Button();
+			this.VoteDownButton = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.RenderPicture)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// RenderPicture
 			// 
-			this.RenderPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.RenderPicture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.RenderPicture.BackColor = System.Drawing.Color.White;
 			this.RenderPicture.Location = new System.Drawing.Point(13, 42);
 			this.RenderPicture.Name = "RenderPicture";
@@ -114,11 +116,33 @@
 			this.InverseButton.UseVisualStyleBackColor = true;
 			this.InverseButton.Click += new System.EventHandler(this.InverseButton_Click);
 			// 
+			// VoteUpButton
+			// 
+			this.VoteUpButton.Location = new System.Drawing.Point(315, 12);
+			this.VoteUpButton.Name = "VoteUpButton";
+			this.VoteUpButton.Size = new System.Drawing.Size(75, 23);
+			this.VoteUpButton.TabIndex = 7;
+			this.VoteUpButton.Text = "Vote +";
+			this.VoteUpButton.UseVisualStyleBackColor = true;
+			this.VoteUpButton.Click += new System.EventHandler(this.VoteUpButton_Click);
+			// 
+			// VoteDownButton
+			// 
+			this.VoteDownButton.Location = new System.Drawing.Point(396, 12);
+			this.VoteDownButton.Name = "VoteDownButton";
+			this.VoteDownButton.Size = new System.Drawing.Size(75, 23);
+			this.VoteDownButton.TabIndex = 8;
+			this.VoteDownButton.Text = "Vote -";
+			this.VoteDownButton.UseVisualStyleBackColor = true;
+			this.VoteDownButton.Click += new System.EventHandler(this.VoteDownButton_Click);
+			// 
 			// JazzimageForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(784, 462);
+			this.Controls.Add(this.VoteDownButton);
+			this.Controls.Add(this.VoteUpButton);
 			this.Controls.Add(this.InverseButton);
 			this.Controls.Add(this.SaveBunchButton);
 			this.Controls.Add(this.SaveButton);
@@ -143,6 +167,8 @@
 		private System.Windows.Forms.Button SaveButton;
 		private System.Windows.Forms.Button SaveBunchButton;
 		private System.Windows.Forms.Button InverseButton;
+		private System.Windows.Forms.Button VoteUpButton;
+		private System.Windows.Forms.Button VoteDownButton;
 	}
 }
 

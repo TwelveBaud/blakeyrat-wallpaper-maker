@@ -11,13 +11,13 @@ namespace Jazzimage
 
 		public Fuzz()
 		{
-			_maxAmount = RandomNumberProvider.GetRandDouble() * 0.05;
+			_maxAmount = RandomNumberProvider.GetDouble() * 0.05;
 		}
 
 		public override PointColor Transform(PointColor input)
 		{
-			input.X = input.X + (RandomNumberProvider.GetRandDouble() * _maxAmount);
-			input.Y = input.Y + (RandomNumberProvider.GetRandDouble() * _maxAmount);
+			input.X = input.X + (RandomNumberProvider.GetDouble() * _maxAmount);
+			input.Y = input.Y + (RandomNumberProvider.GetDouble() * _maxAmount);
 
 			return input;
 		}

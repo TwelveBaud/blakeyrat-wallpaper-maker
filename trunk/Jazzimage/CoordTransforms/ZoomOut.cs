@@ -11,7 +11,7 @@ namespace Jazzimage
 
 		public ZoomOut()
 		{
-			_amount = RandomNumberProvider.GetRandDouble() * 100;
+			_amount = RandomNumberProvider.GetDouble() * 100;
 		}
 
 		public override PointColor Transform(PointColor input)

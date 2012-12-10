@@ -51,6 +51,10 @@
     <Compile Include="ColorTransforms\AlterRed.cs" />
     <Compile Include="ColorTransforms\Circle.cs" />
     <Compile Include="ColorTransforms\FuzzAlpha.cs" />
+    <Compile Include="ColorTransforms\GradientCircle.cs" />
+    <Compile Include="ColorTransforms\GradientCrazyCircle.cs" />
+    <Compile Include="ColorTransforms\GradientX.cs" />
+    <Compile Include="ColorTransforms\GradientY.cs" />
     <Compile Include="ColorTransforms\GreyscaleX.cs" />
     <Compile Include="ColorTransforms\GreyscaleY.cs" />
     <Compile Include="ColorTransforms\HorizontalStripe.cs" />
@@ -67,6 +71,8 @@
     <Compile Include="CoordTransforms\Swirl.cs" />
     <Compile Include="CoordTransforms\TiltX.cs" />
     <Compile Include="CoordTransforms\TiltY.cs" />
+    <Compile Include="CoordTransforms\ZigZagX.cs" />
+    <Compile Include="CoordTransforms\ZigZagY.cs" />
     <Compile Include="CoordTransforms\ZoomOut.cs" />
     <Compile Include="JazzImageDefinition.cs" />
     <Compile Include="JazzimageForm.cs">
@@ -75,11 +81,13 @@
     <Compile Include="JazzimageForm.Designer.cs">
       <DependentUpon>JazzimageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Gradient.cs" />
     <Compile Include="RandomNumberProvider.cs" />
     <Compile Include="PointColor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransformParent.cs" />
+    <Compile Include="TransformVoting.cs" />
     <EmbeddedResource Include="JazzimageForm.resx">
       <DependentUpon>JazzimageForm.cs</DependentUpon>
     </EmbeddedResource>

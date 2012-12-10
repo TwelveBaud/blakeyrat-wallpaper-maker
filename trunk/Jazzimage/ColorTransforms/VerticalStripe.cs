@@ -14,9 +14,9 @@ namespace Jazzimage
 
 		public VerticalStripe()
 		{
-			_stripeWidth = RandomNumberProvider.GetRandDouble() * 0.25;
+			_stripeWidth = RandomNumberProvider.GetDouble() * 0.25;
 			_stripeColor = ColorUtils.GetRandomColor();
-			_stripeColor = Color.FromArgb(RandomNumberProvider.GetRandInt(127), _stripeColor.R, _stripeColor.G, _stripeColor.B);
+			_stripeColor = Color.FromArgb(RandomNumberProvider.GetInt(127), _stripeColor.R, _stripeColor.G, _stripeColor.B);
 		}
 
 		public override PointColor Transform(PointColor input)

@@ -14,16 +14,16 @@ namespace Jazzimage
 
 		public MoveOrigin()
 		{
-			_moveX = RandomNumberProvider.GetRandDouble() - 1.0;
-			_moveY = RandomNumberProvider.GetRandDouble() - 1.0;
+			_moveX = RandomNumberProvider.GetDouble() - 1.0;
+			_moveY = RandomNumberProvider.GetDouble() - 1.0;
 
 			_frameX = false;
-			if (RandomNumberProvider.GetRandDouble() < 0.5)
+			if (RandomNumberProvider.GetDouble() < 0.5)
 			{
 				_frameX = true;
 			}
 			_frameY = false;
-			if (RandomNumberProvider.GetRandDouble() < 0.5)
+			if (RandomNumberProvider.GetDouble() < 0.5)
 			{
 				_frameY = true;
 			}

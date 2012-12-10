@@ -11,7 +11,7 @@ namespace Jazzimage
 
 		public BulgeY()
 		{
-			_amount = RandomNumberProvider.GetRandDouble() * 2.0;
+			_amount = RandomNumberProvider.GetDouble() * 2.0;
 		}
 
 		public override PointColor Transform(PointColor input)

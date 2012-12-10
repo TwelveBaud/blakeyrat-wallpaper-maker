@@ -11,7 +11,7 @@ namespace Jazzimage
 
         public TiltY()
         {
-            _amount = RandomNumberProvider.GetRandDouble();
+            _amount = RandomNumberProvider.GetDouble();
         }
 
         public override PointColor Transform(PointColor input)

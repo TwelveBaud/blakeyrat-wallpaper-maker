@@ -13,7 +13,7 @@ namespace Jazzimage
 		
 		public AlterBlue()
 		{
-			_amount = (RandomNumberProvider.GetRandDouble() * 1.5) + 0.5;
+			_amount = (RandomNumberProvider.GetDouble() * 1.5) + 0.5;
 		}
 		
 		public override PointColor Transform(PointColor input)

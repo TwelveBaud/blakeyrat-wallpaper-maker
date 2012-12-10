@@ -10,9 +10,9 @@ namespace Jazzimage
 {
 	class JazzImageDefinition
 	{
-		const int NUMBER_OF_TRANSFORM_LAYERS = 12;
-		const int NUMBER_OF_THREADS = 3;
+		const int NUMBER_OF_THREADS = 8;
 
+		int _numTransforms;
 		List<TransformParent> _transforms;
 		int _width;
 		int _height;
@@ -23,22 +23,23 @@ namespace Jazzimage
 		public JazzImageDefinition(int width, int height)
 		{
 			_transforms = new List<TransformParent>();
+			_numTransforms = TransformVoting.GetNumTransforms();
 
-			for (int i = 0; i < (NUMBER_OF_TRANSFORM_LAYERS - 1); i++)
+			for (int i = 0; i < (_numTransforms - 1); i++)
 			{
 				//_transforms.Add(SelectRandomTransform());
 
-				if (i % 2 == 0)
+				if (i % 3 == 0)
 				{
-					_transforms.Add(SelectRandomTransform());
+					_transforms.Add(TransformVoting.GetColorTransform());
 				}
 				else
 				{
-					_transforms.Add(new MoveOrigin());
+					_transforms.Add(TransformVoting.GetCoordTransform());
 				}
 			}
 
-			_transforms.Add(SelectRandomColorTransform());
+			_transforms.Add(TransformVoting.GetColorTransform());
 
 			// For QAing specific transforms
 			//_transforms.Add(new Swirl());
@@ -55,114 +56,6 @@ namespace Jazzimage
 			{
 				_transforms[i].NextFrame(0.001);
 			}
-		}
-
-		public TransformParent SelectRandomTransform()
-		{
-			double selector = RandomNumberProvider.GetRandDouble() * (NUMBER_OF_COORD_TRANSFORMS + NUMBER_OF_COLOR_TRANSFORMS);
-
-			if (selector < NUMBER_OF_COORD_TRANSFORMS)
-			{
-				return SelectRandomCoordTransform();
-			}
-			else
-			{
-				return SelectRandomColorTransform();
-			}
-		}
-
-		const int NUMBER_OF_COORD_TRANSFORMS = 11;
-
-		public TransformParent SelectRandomCoordTransform()
-		{
-			int transformSelector = RandomNumberProvider.GetRandInt(NUMBER_OF_COORD_TRANSFORMS);
-			TransformParent transform = new TransformParent();
-
-			switch (transformSelector)
-			{
-				case 0:
-					transform = new BulgeX();
-					break;
-				case 1:
-					transform = new BulgeY();
-					break;
-				case 2:
-					transform = new Fisheye();
-					break;
-				case 3:
-					transform = new Fuzz();
-					break;
-				case 4:
-					transform = new Rotate();
-					break;
-				case 5:
-					transform = new SineX();
-					break;
-				case 6:
-					transform = new SineY();
-					break;
-				case 7:
-					transform = new Swirl();
-					break;
-				case 8:
-					transform = new TiltX();
-					break;
-				case 9:
-					transform = new TiltY();
-					break;
-				case 10:
-					transform = new ZoomOut();
-					break;
-				default:
-					transform = new TransformParent();
-					break;
-			}
-
-			return transform;
-		}
-
-		const int NUMBER_OF_COLOR_TRANSFORMS = 9;
-
-		public TransformParent SelectRandomColorTransform()
-		{
-			int transformSelector = RandomNumberProvider.GetRandInt(NUMBER_OF_COLOR_TRANSFORMS);
-			TransformParent transform = new TransformParent();
-
-			switch (transformSelector)
-			{
-				case 0:
-					transform = new AlterBlue();
-					break;
-				case 1:
-					transform = new AlterGreen();
-					break;
-				case 2:
-					transform = new AlterRed();
-					break;
-				case 3:
-					transform = new Circle();
-					break;
-				case 4:
-					transform = new FuzzAlpha();
-					break;
-				case 5:
-					transform = new GreyscaleX();
-					break;
-				case 6:
-					transform = new GreyscaleY();
-					break;
-				case 7:
-					transform = new HorizontalStripe();
-					break;
-				case 8:
-					transform = new VerticalStripe();
-					break;
-				default:
-					transform = new TransformParent();
-					break;
-			}
-
-			return transform;
 		}
 
 		public Image GetResultingImage()
@@ -209,6 +102,21 @@ namespace Jazzimage
 			return _threadResults;
 		}
 
+		public void VoteUp()
+		{
+			double voteAmount = 1.0 / _numTransforms;
+
+			TransformVoting.RecordVotes(_transforms, _numTransforms, voteAmount);
+		}
+
+		public void VoteDown()
+		{
+			double voteAmount = 1.0 / _numTransforms;
+			voteAmount = -voteAmount;
+
+			TransformVoting.RecordVotes(_transforms, _numTransforms, voteAmount);
+		}
+
 		protected Image GetImageRect(int left, int top, int width, int height)
 		{
 			Bitmap result = new Bitmap(width, height);
@@ -224,7 +132,6 @@ namespace Jazzimage
 
 			return result;
 		}
-
 
 		protected void ThreadManager(object input)
 		{
@@ -263,8 +170,8 @@ namespace Jazzimage
 			{
 				PointColor pc = new PointColor();
 
-				pc.X = xDouble + (RandomNumberProvider.GetRandDouble() - 0.5);
-				pc.Y = yDouble + (RandomNumberProvider.GetRandDouble() - 0.5);
+				pc.X = xDouble + (RandomNumberProvider.GetDouble() - 0.5);
+				pc.Y = yDouble + (RandomNumberProvider.GetDouble() - 0.5);
 
 				Color c = GetColorFromPointColor(pc);
 

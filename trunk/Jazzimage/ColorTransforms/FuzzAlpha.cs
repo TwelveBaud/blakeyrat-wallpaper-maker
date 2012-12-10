@@ -14,8 +14,8 @@ namespace Jazzimage
 
 		public FuzzAlpha()
 		{
-			int value1 = RandomNumberProvider.GetRandInt(256);
-			int value2 = RandomNumberProvider.GetRandInt(256);
+			int value1 = RandomNumberProvider.GetInt(256);
+			int value2 = RandomNumberProvider.GetInt(256);
 
 			_minValue = Math.Min(value1, value2);
 			_maxValue = Math.Max(value1, value2);
@@ -23,7 +23,7 @@ namespace Jazzimage
 
 		public override PointColor Transform(PointColor input)
 		{
-			int newAlpha = RandomNumberProvider.GetRandInt(_maxValue - _minValue) + _minValue;
+			int newAlpha = RandomNumberProvider.GetInt(_maxValue - _minValue) + _minValue;
 
 			input.Color = Color.FromArgb(newAlpha, input.Color.R, input.Color.G, input.Color.B);
 

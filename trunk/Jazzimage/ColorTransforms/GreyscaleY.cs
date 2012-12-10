@@ -13,7 +13,7 @@ namespace Jazzimage
 
         public GreyscaleY()
         {
-            _alpha = RandomNumberProvider.GetRandInt(256);
+            _alpha = RandomNumberProvider.GetInt(256);
         }
 
         public override PointColor Transform(PointColor input)

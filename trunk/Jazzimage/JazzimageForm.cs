@@ -30,6 +30,9 @@ namespace Jazzimage
 			_jazzImage = new JazzImageDefinition(IMAGE_WIDTH, IMAGE_HEIGHT);
 
 			RenderPicture.Image = _jazzImage.GetResultingImageThreaded();
+
+			VoteUpButton.Enabled = true;
+			VoteDownButton.Enabled = true;
 		}
 
 		private void NextFrameButton_Click(object sender, EventArgs e)
@@ -102,6 +105,22 @@ namespace Jazzimage
 		private void InverseButton_Click(object sender, EventArgs e)
 		{
 			//RenderPicture.Image = _jazzImage.GetResultingImageThreaded();
+		}
+
+		private void VoteUpButton_Click(object sender, EventArgs e)
+		{
+			_jazzImage.VoteUp();
+
+			VoteUpButton.Enabled = false;
+			VoteDownButton.Enabled = false;
+		}
+
+		private void VoteDownButton_Click(object sender, EventArgs e)
+		{
+			_jazzImage.VoteDown();
+
+			VoteUpButton.Enabled = false;
+			VoteDownButton.Enabled = false;
 		}
 	}
 }
