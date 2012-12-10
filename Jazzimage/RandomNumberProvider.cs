@@ -9,7 +9,7 @@ namespace Jazzimage
 	{
 		static Random _rand = new Random();
 
-		static public double GetRandDouble()
+		static public double GetDouble()
 		{
 			double result;
 
@@ -22,7 +22,7 @@ namespace Jazzimage
 			return result;
 		}
 
-		static public int GetRandInt( int maxValue )
+		static public int GetInt( int maxValue )
 		{
 			int result;
 

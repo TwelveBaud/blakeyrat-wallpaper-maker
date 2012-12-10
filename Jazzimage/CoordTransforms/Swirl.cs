@@ -11,7 +11,7 @@ namespace Jazzimage
 
 		public Swirl()
 		{
-			_amountMultiplier = RandomNumberProvider.GetRandDouble() * (2 * Math.PI);
+			_amountMultiplier = RandomNumberProvider.GetDouble() * (2 * Math.PI);
 		}
 		
 		public override PointColor Transform( PointColor input)

@@ -14,9 +14,9 @@ namespace Jazzimage
 
 		public Circle()
 		{
-			_circleRadius = RandomNumberProvider.GetRandDouble();
+			_circleRadius = RandomNumberProvider.GetDouble();
 			_circleColor = ColorUtils.GetRandomColor();
-			_circleColor = Color.FromArgb(RandomNumberProvider.GetRandInt(127), _circleColor.R, _circleColor.G, _circleColor.B);
+			_circleColor = Color.FromArgb(RandomNumberProvider.GetInt(127), _circleColor.R, _circleColor.G, _circleColor.B);
 		}
 
 		public override PointColor Transform(PointColor input)
