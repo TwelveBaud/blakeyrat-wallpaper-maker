@@ -14,6 +14,7 @@ namespace Jazzimage
 		static Dictionary<int, double> _numTransformVotes = new Dictionary<int, double>();
 		static Dictionary<string, Type> _colorTransforms = new Dictionary<string, Type>();
 		static Dictionary<string, Type> _coordTransforms = new Dictionary<string, Type>();
+		static double _numVotes = 0;
 
 		static TransformVoting()
 		{
@@ -156,6 +157,11 @@ namespace Jazzimage
 			return selectedNumTransform;
 		}
 
+		public static double GetNumVotes()
+		{
+			return _numVotes;
+		}
+
 		public static void RecordVotes(List<TransformParent> transforms, int numTransforms, double voteAmount)
 		{
 			foreach (TransformParent transform in transforms)
@@ -178,12 +184,14 @@ namespace Jazzimage
 			// numTransform vote
 			if (voteAmount > 0)
 			{
-				_numTransformVotes[numTransforms] += 1.0;
+				_numTransformVotes[numTransforms] += 0.1;
 			}
 			else
 			{
-				_numTransformVotes[numTransforms] -= 1.0;
+				_numTransformVotes[numTransforms] -= 0.1;
 			}
+
+			_numVotes += 1.0;
 
 			NormalizeVotes();
 			SaveVotes();
@@ -197,21 +205,20 @@ namespace Jazzimage
 
 			foreach (string transform in _colorVotes.Keys)
 			{
-				file.WriteLine(transform);
-				file.WriteLine(_colorVotes[transform]);
+				file.WriteLine(transform + "\t" + _colorVotes[transform]);
 			}
 
 			foreach (string transform in _coordVotes.Keys)
 			{
-				file.WriteLine(transform);
-				file.WriteLine(_coordVotes[transform]);
+				file.WriteLine(transform + "\t" + _coordVotes[transform]);
 			}
 
 			foreach (int numTransforms in _numTransformVotes.Keys)
 			{
-				file.WriteLine(numTransforms);
-				file.WriteLine(_numTransformVotes[numTransforms]);
+				file.WriteLine(numTransforms + "\t" + _numTransformVotes[numTransforms]);
 			}
+
+			file.WriteLine("votes\t" + _numVotes);
 
 			file.Close();
 		}
@@ -228,11 +235,13 @@ namespace Jazzimage
 
 			StreamReader file = new StreamReader(fileName);
 
-			string transformName = file.ReadLine();
-			string transformVoteStr = file.ReadLine();
+			string line = file.ReadLine();
 
-			while (transformName != null && transformVoteStr != null)
+			while (line != null)
 			{
+				string transformName = line.Split('\t')[0];
+				string transformVoteStr = line.Split('\t')[1];
+				
 				double transformVote = Convert.ToDouble(transformVoteStr);
 
 				// Try color votes
@@ -254,8 +263,12 @@ namespace Jazzimage
 					_numTransformVotes[transformNameInt] = transformVote;
 				}
 
-				transformName = file.ReadLine();
-				transformVoteStr = file.ReadLine();
+				if( transformName == "votes" )
+				{
+					_numVotes = transformVote;
+				}
+
+				line = file.ReadLine();
 			}
 
 			NormalizeVotes();

@@ -113,6 +113,8 @@ namespace Jazzimage
 
 			VoteUpButton.Enabled = false;
 			VoteDownButton.Enabled = false;
+
+			VotesLabel.Text = Convert.ToString(TransformVoting.GetNumVotes());
 		}
 
 		private void VoteDownButton_Click(object sender, EventArgs e)
@@ -121,6 +123,8 @@ namespace Jazzimage
 
 			VoteUpButton.Enabled = false;
 			VoteDownButton.Enabled = false;
+
+			VotesLabel.Text = Convert.ToString(TransformVoting.GetNumVotes());
 		}
 	}
 }
