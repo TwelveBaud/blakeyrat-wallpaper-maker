@@ -37,6 +37,7 @@
 			this.InverseButton = new System.Windows.Forms.Button();
 			this.VoteUpButton = new System.Windows.Forms.Button();
 			this.VoteDownButton = new System.Windows.Forms.Button();
+			this.VotesLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.RenderPicture)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -118,6 +119,7 @@
 			// 
 			// VoteUpButton
 			// 
+			this.VoteUpButton.Enabled = false;
 			this.VoteUpButton.Location = new System.Drawing.Point(315, 12);
 			this.VoteUpButton.Name = "VoteUpButton";
 			this.VoteUpButton.Size = new System.Drawing.Size(75, 23);
@@ -128,6 +130,7 @@
 			// 
 			// VoteDownButton
 			// 
+			this.VoteDownButton.Enabled = false;
 			this.VoteDownButton.Location = new System.Drawing.Point(396, 12);
 			this.VoteDownButton.Name = "VoteDownButton";
 			this.VoteDownButton.Size = new System.Drawing.Size(75, 23);
@@ -136,11 +139,21 @@
 			this.VoteDownButton.UseVisualStyleBackColor = true;
 			this.VoteDownButton.Click += new System.EventHandler(this.VoteDownButton_Click);
 			// 
+			// VotesLabel
+			// 
+			this.VotesLabel.AutoSize = true;
+			this.VotesLabel.Location = new System.Drawing.Point(296, 17);
+			this.VotesLabel.Name = "VotesLabel";
+			this.VotesLabel.Size = new System.Drawing.Size(13, 13);
+			this.VotesLabel.TabIndex = 9;
+			this.VotesLabel.Text = "?";
+			// 
 			// JazzimageForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(784, 462);
+			this.Controls.Add(this.VotesLabel);
 			this.Controls.Add(this.VoteDownButton);
 			this.Controls.Add(this.VoteUpButton);
 			this.Controls.Add(this.InverseButton);
@@ -155,6 +168,7 @@
 			this.Text = "Jazzimage";
 			((System.ComponentModel.ISupportInitialize)(this.RenderPicture)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -169,6 +183,7 @@
 		private System.Windows.Forms.Button InverseButton;
 		private System.Windows.Forms.Button VoteUpButton;
 		private System.Windows.Forms.Button VoteDownButton;
+		private System.Windows.Forms.Label VotesLabel;
 	}
 }
 
