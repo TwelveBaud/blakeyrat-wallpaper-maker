@@ -142,7 +142,7 @@
 			// VotesLabel
 			// 
 			this.VotesLabel.AutoSize = true;
-			this.VotesLabel.Location = new System.Drawing.Point(296, 17);
+			this.VotesLabel.Location = new System.Drawing.Point(285, 17);
 			this.VotesLabel.Name = "VotesLabel";
 			this.VotesLabel.Size = new System.Drawing.Size(13, 13);
 			this.VotesLabel.TabIndex = 9;
