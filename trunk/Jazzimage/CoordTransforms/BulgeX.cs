@@ -29,7 +29,7 @@ namespace Jazzimage
 
 		public override void NextFrame(double percentChange)
 		{
-			_amount += percentChange * (2 * Math.PI);
+			_amount += percentChange * 2.0;
 		}
 	}
 }

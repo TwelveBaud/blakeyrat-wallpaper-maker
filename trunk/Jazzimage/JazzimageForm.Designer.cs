@@ -38,6 +38,8 @@
 			this.VoteUpButton = new System.Windows.Forms.Button();
 			this.VoteDownButton = new System.Windows.Forms.Button();
 			this.VotesLabel = new System.Windows.Forms.Label();
+			this.FrameNumsField = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.RenderPicture)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -49,7 +51,7 @@
 			this.RenderPicture.BackColor = System.Drawing.Color.White;
 			this.RenderPicture.Location = new System.Drawing.Point(13, 42);
 			this.RenderPicture.Name = "RenderPicture";
-			this.RenderPicture.Size = new System.Drawing.Size(759, 408);
+			this.RenderPicture.Size = new System.Drawing.Size(959, 707);
 			this.RenderPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.RenderPicture.TabIndex = 0;
 			this.RenderPicture.TabStop = false;
@@ -77,7 +79,7 @@
 			// MovieButton
 			// 
 			this.MovieButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.MovieButton.Location = new System.Drawing.Point(697, 12);
+			this.MovieButton.Location = new System.Drawing.Point(788, 12);
 			this.MovieButton.Name = "MovieButton";
 			this.MovieButton.Size = new System.Drawing.Size(75, 23);
 			this.MovieButton.TabIndex = 3;
@@ -88,7 +90,7 @@
 			// SaveButton
 			// 
 			this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.SaveButton.Location = new System.Drawing.Point(535, 12);
+			this.SaveButton.Location = new System.Drawing.Point(626, 12);
 			this.SaveButton.Name = "SaveButton";
 			this.SaveButton.Size = new System.Drawing.Size(75, 23);
 			this.SaveButton.TabIndex = 4;
@@ -99,7 +101,7 @@
 			// SaveBunchButton
 			// 
 			this.SaveBunchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.SaveBunchButton.Location = new System.Drawing.Point(616, 12);
+			this.SaveBunchButton.Location = new System.Drawing.Point(707, 12);
 			this.SaveBunchButton.Name = "SaveBunchButton";
 			this.SaveBunchButton.Size = new System.Drawing.Size(75, 23);
 			this.SaveBunchButton.TabIndex = 5;
@@ -148,11 +150,32 @@
 			this.VotesLabel.TabIndex = 9;
 			this.VotesLabel.Text = "?";
 			// 
+			// FrameNumsField
+			// 
+			this.FrameNumsField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.FrameNumsField.Location = new System.Drawing.Point(919, 14);
+			this.FrameNumsField.Name = "FrameNumsField";
+			this.FrameNumsField.Size = new System.Drawing.Size(53, 20);
+			this.FrameNumsField.TabIndex = 10;
+			this.FrameNumsField.Text = "300";
+			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(869, 17);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(44, 13);
+			this.label1.TabIndex = 11;
+			this.label1.Text = "Frames:";
+			// 
 			// JazzimageForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(784, 462);
+			this.ClientSize = new System.Drawing.Size(984, 761);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.FrameNumsField);
 			this.Controls.Add(this.VotesLabel);
 			this.Controls.Add(this.VoteDownButton);
 			this.Controls.Add(this.VoteUpButton);
@@ -163,7 +186,7 @@
 			this.Controls.Add(this.NextFrameButton);
 			this.Controls.Add(this.NewImageButton);
 			this.Controls.Add(this.RenderPicture);
-			this.MinimumSize = new System.Drawing.Size(800, 500);
+			this.MinimumSize = new System.Drawing.Size(1000, 800);
 			this.Name = "JazzimageForm";
 			this.Text = "Jazzimage";
 			((System.ComponentModel.ISupportInitialize)(this.RenderPicture)).EndInit();
@@ -184,6 +207,8 @@
 		private System.Windows.Forms.Button VoteUpButton;
 		private System.Windows.Forms.Button VoteDownButton;
 		private System.Windows.Forms.Label VotesLabel;
+		private System.Windows.Forms.TextBox FrameNumsField;
+		private System.Windows.Forms.Label label1;
 	}
 }
 
