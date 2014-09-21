@@ -10,15 +10,16 @@ namespace Jazzimage
 	public class AlterRed : TransformParent
 	{
 		double _amount;
-		
+
 		public AlterRed()
 		{
 			_amount = (RandomNumberProvider.GetDouble() * 1.5) + 0.5;
 		}
-		
+
 		public override PointColor Transform(PointColor input)
 		{
-			input.Color = ColorUtils.CapColor(input.Color.A, Convert.ToInt32(Convert.ToDouble(input.Color.R) * _amount), input.Color.G, input.Color.B);
+			input.Color = new DoubleColor(input.Color.R * _amount, input.Color.G, input.Color.B, input.Color.A);
+			input.Color.NormalizeRGB();
 
 			return input;
 		}

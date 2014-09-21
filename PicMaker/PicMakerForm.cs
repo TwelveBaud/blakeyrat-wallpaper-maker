@@ -90,6 +90,11 @@ namespace PicMaker
 
 			DateTime currentDate = DateToSaveField.Value;
 
+			while (!(currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday))
+			{
+				currentDate = currentDate.AddDays(1);
+			}
+
 			for (int i = 0; i < Convert.ToInt32(NumberToSaveField.Text); i++)
 			{
 				int seed = m_rand.Next();
@@ -108,6 +113,11 @@ namespace PicMaker
 
 				// Next day
 				currentDate = currentDate.AddDays(1);
+
+				while (!(currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday))
+				{
+					currentDate = currentDate.AddDays(1);
+				}
 
 				m_image = thisImage;
 				ResultsBox.Image = m_image;

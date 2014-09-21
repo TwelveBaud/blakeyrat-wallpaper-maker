@@ -59,7 +59,6 @@
     <Compile Include="ColorTransforms\GreyscaleY.cs" />
     <Compile Include="ColorTransforms\HorizontalStripe.cs" />
     <Compile Include="ColorTransforms\VerticalStripe.cs" />
-    <Compile Include="ColorUtils.cs" />
     <Compile Include="CoordTransforms\BulgeX.cs" />
     <Compile Include="CoordTransforms\BulgeY.cs" />
     <Compile Include="CoordTransforms\Fisheye.cs" />
@@ -74,6 +73,8 @@
     <Compile Include="CoordTransforms\ZigZagX.cs" />
     <Compile Include="CoordTransforms\ZigZagY.cs" />
     <Compile Include="CoordTransforms\ZoomOut.cs" />
+    <Compile Include="DoubleColor.cs" />
+    <Compile Include="DoubleColorStatic.cs" />
     <Compile Include="JazzImageDefinition.cs" />
     <Compile Include="JazzimageForm.cs">
       <SubType>Form</SubType>

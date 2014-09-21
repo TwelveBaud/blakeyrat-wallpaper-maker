@@ -9,13 +9,13 @@ namespace Jazzimage
 {
 	class FuzzAlpha : TransformParent
 	{
-		protected int _minValue;
-		protected int _maxValue;
+		protected double _minValue;
+		protected double _maxValue;
 
 		public FuzzAlpha()
 		{
-			int value1 = RandomNumberProvider.GetInt(256);
-			int value2 = RandomNumberProvider.GetInt(256);
+			var value1 = RandomNumberProvider.GetDouble();
+			var value2 = RandomNumberProvider.GetDouble();
 
 			_minValue = Math.Min(value1, value2);
 			_maxValue = Math.Max(value1, value2);
@@ -23,9 +23,9 @@ namespace Jazzimage
 
 		public override PointColor Transform(PointColor input)
 		{
-			int newAlpha = RandomNumberProvider.GetInt(_maxValue - _minValue) + _minValue;
+			double newAlpha = (RandomNumberProvider.GetDouble() * (_maxValue - _minValue)) + _minValue;
 
-			input.Color = Color.FromArgb(newAlpha, input.Color.R, input.Color.G, input.Color.B);
+			input.Color = new DoubleColor(input.Color.R, input.Color.G, input.Color.B, newAlpha);
 
 			return input;
 		}

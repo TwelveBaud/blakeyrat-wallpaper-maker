@@ -10,13 +10,13 @@ namespace Jazzimage
 	class HorizontalStripe : TransformParent
 	{
 		double _stripeWidth;
-		Color _stripeColor;
+		DoubleColor _stripeColor;
 
 		public HorizontalStripe()
 		{
 			_stripeWidth = RandomNumberProvider.GetDouble() * 0.25;
-			_stripeColor = ColorUtils.GetRandomColor();
-			_stripeColor = Color.FromArgb(RandomNumberProvider.GetInt(127), _stripeColor.R, _stripeColor.G, _stripeColor.B);
+			_stripeColor = DoubleColor.GetRandomColorAlpha();
+			_stripeColor.A = _stripeColor.A / 2.0;
 		}
 
 		public override PointColor Transform(PointColor input)
@@ -29,7 +29,7 @@ namespace Jazzimage
 
 			if (inY % (_stripeWidth * 2) < _stripeWidth)
 			{
-				input.Color = ColorUtils.Combine(input.Color, _stripeColor);
+				input.Color = DoubleColor.Combine(input.Color, _stripeColor);
 			}
 
 			return input;

@@ -9,14 +9,12 @@ namespace Jazzimage
 {
 	class GradientCrazyCircle : TransformParent
 	{
-		int _alpha;
 		Gradient _gradient;
 		double _originX;
 		double _originY;
 
 		public GradientCrazyCircle()
 		{
-			_alpha = RandomNumberProvider.GetInt(256);
 			_gradient = new Gradient();
 			_originX = RandomNumberProvider.GetDouble();
 			_originY = RandomNumberProvider.GetDouble();
@@ -26,7 +24,7 @@ namespace Jazzimage
 		{
 			double tempOriginX = RandomNumberProvider.GetDouble() * _originX;
 			double tempOriginY = RandomNumberProvider.GetDouble() * _originY;
-			
+
 			double inX = input.X - 0.5;
 			double inY = input.Y - 0.5;
 
@@ -37,9 +35,9 @@ namespace Jazzimage
 
 			dist = dist % 1.0;
 
-			Color outColor = _gradient.GetColorAtValue(dist);
+			var outColor = _gradient.GetColorAtValue(dist);
 
-			input.Color = Color.FromArgb(_alpha, outColor.R, outColor.G, outColor.B);
+			input.Color = outColor;
 
 			return input;
 		}

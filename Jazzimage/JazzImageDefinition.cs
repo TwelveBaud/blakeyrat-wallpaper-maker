@@ -10,7 +10,7 @@ namespace Jazzimage
 {
 	class JazzImageDefinition
 	{
-		const int NUMBER_OF_THREADS = 8;
+		const int NUMBER_OF_THREADS = 3;
 
 		int _numTransforms;
 		List<TransformParent> _transforms;
@@ -136,10 +136,10 @@ namespace Jazzimage
 		protected void ThreadManager(object input)
 		{
 			int which = (int)input;
+			Random rand = new Random();
 
 			for (int y = which; y < _height; y += NUMBER_OF_THREADS)
 			{
-
 				Image result = GetImageRect(0, y, _width, 1);
 
 				lock (_threadGraf)
@@ -151,7 +151,7 @@ namespace Jazzimage
 
 		public Color GetColorFromPoint(int x, int y)
 		{
-			PointColor pc = new PointColor((Convert.ToDouble(x) / _width), (Convert.ToDouble(y) / _height), Color.Transparent);
+			var pc = new PointColor((Convert.ToDouble(x) / _width), (Convert.ToDouble(y) / _height), new DoubleColor());
 
 			return GetColorFromPointColor(pc);
 		}
@@ -198,30 +198,30 @@ namespace Jazzimage
 
 		public Color GetColorFromPointColor(PointColor pc)
 		{
-			pc.Color = Color.Transparent;
+			pc.Color = new DoubleColor();
 
 			for (int i = 0; i < _transforms.Count; i++)
 			{
 				pc = _transforms[i].Transform(pc);
 			}
 
-			pc.Color = Color.FromArgb(255, pc.Color.R, pc.Color.G, pc.Color.B);
+			pc.Color.A = 1.0;
 
-			return pc.Color;
+			return pc.Color.ToColor();
 		}
 
 		public Color GetColorFromPointInverse(int x, int y)
 		{
-			PointColor pc = new PointColor((Convert.ToDouble(x) / _width), (Convert.ToDouble(y) / _height), Color.Transparent);
+			var pc = new PointColor((Convert.ToDouble(x) / _width), (Convert.ToDouble(y) / _height), new DoubleColor());
 
 			for (int i = _transforms.Count; i > 0; i--)
 			{
 				pc = _transforms[i - 1].Transform(pc);
 			}
 
-			pc.Color = Color.FromArgb(255, pc.Color.R, pc.Color.G, pc.Color.B);
+			pc.Color.A = 1.0;
 
-			return pc.Color;
+			return pc.Color.ToColor();
 		}
 
 		public int Width
