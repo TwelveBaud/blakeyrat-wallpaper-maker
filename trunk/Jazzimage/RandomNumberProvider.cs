@@ -7,32 +7,37 @@ namespace Jazzimage
 {
 	static class RandomNumberProvider
 	{
-		static Random _rand = new Random();
+		private static Random _randGlobal = new Random();
+		[ThreadStatic]
+		private static Random _randLocal;
 
 		static public double GetDouble()
 		{
-			double result;
-
-			// Lock requires to make random number generation thread-safe
-			lock (_rand)
-			{
-				result = _rand.NextDouble();
-			}
-
-			return result;
+			Random rand = GetLocalRand();
+			return rand.NextDouble();
 		}
 
 		static public int GetInt( int maxValue )
 		{
-			int result;
+			Random rand = GetLocalRand();
+			return rand.Next(maxValue);
+		}
 
-			// Lock requires to make random number generation thread-safe
-			lock (_rand)
+		static private Random GetLocalRand()
+		{
+			Random rand = _randLocal;
+
+			if (rand == null)
 			{
-				result = _rand.Next(maxValue);
+				int seed;
+				lock (_randGlobal)
+				{
+					seed = _randGlobal.Next();
+				}
+				_randLocal = rand = new Random(seed);
 			}
 
-			return result;
+			return rand;
 		}
 	}
 }

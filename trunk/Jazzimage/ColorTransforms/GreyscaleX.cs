@@ -7,34 +7,34 @@ using System.Drawing;
 
 namespace Jazzimage
 {
-    class GreyscaleX : TransformParent
-    {
-        int _alpha;
+	class GreyscaleX : TransformParent
+	{
+		double _alpha;
 
-        public GreyscaleX()
-        {
-            _alpha = RandomNumberProvider.GetInt(256);
-        }
+		public GreyscaleX()
+		{
+			_alpha = RandomNumberProvider.GetDouble();
+		}
 
-        public override PointColor Transform(PointColor input)
-        {
-            double inX = input.X;
+		public override PointColor Transform(PointColor input)
+		{
+			var inX = input.X;
 
-            inX = inX % 1.0;
-            int greyVal = Convert.ToInt32( inX * 256 );
+			inX = inX % 1.0;
+			var greyVal = inX * 256.0;
 
-            if( greyVal < 0 )
-            {
-                greyVal = 0;
-            };
-            if( greyVal > 255 )
-            {
-                greyVal = 255;
-            };
+			if (greyVal < 0.0)
+			{
+				greyVal = 0;
+			};
+			if (greyVal > 1.0)
+			{
+				greyVal = 1.0;
+			};
 
-            input.Color = Color.FromArgb(_alpha, greyVal, greyVal, greyVal);
+			input.Color = new DoubleColor(greyVal, greyVal, greyVal, _alpha);
 
-            return input;
-        }
-    }
+			return input;
+		}
+	}
 }

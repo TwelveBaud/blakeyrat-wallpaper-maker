@@ -20,6 +20,7 @@ namespace Jazzimage
 		//static int IMAGE_HEIGHT = 240;
 
 		private JazzImageDefinition _jazzImage;
+		private Thread _callbackThread;
 
 		public JazzimageForm()
 		{
@@ -32,8 +33,7 @@ namespace Jazzimage
 
 			RenderPicture.Image = _jazzImage.GetResultingImageThreaded();
 
-			VoteUpButton.Enabled = true;
-			VoteDownButton.Enabled = true;
+			EnableAllButtons();
 		}
 
 		private void NextFrameButton_Click(object sender, EventArgs e)
@@ -85,6 +85,7 @@ namespace Jazzimage
 			{
 				_jazzImage = new JazzImageDefinition(IMAGE_WIDTH, IMAGE_HEIGHT);
 				Image frame = _jazzImage.GetResultingImageThreaded();
+				//Image frame = _jazzImage.GetResultingImage();
 
 				string filename = GetNextFilename();
 
@@ -105,7 +106,7 @@ namespace Jazzimage
 
 		private string GetNextFilename()
 		{
-			DateTime currentDate = new DateTime(2013, 01, 01);
+			DateTime currentDate = new DateTime(2015, 01, 01);
 			int dayCount = 0;
 
 			while (true)
@@ -151,6 +152,33 @@ namespace Jazzimage
 			VoteDownButton.Enabled = false;
 
 			VotesLabel.Text = Convert.ToString(TransformVoting.GetNumVotes());
+		}
+
+		private void DisableAllButtons()
+		{
+			NewImageButton.Enabled = false;
+			NextFrameButton.Enabled = false;
+			InverseButton.Enabled = false;
+			VoteUpButton.Enabled = false;
+			VoteDownButton.Enabled = false;
+			SaveButton.Enabled = false;
+			SaveBunchButton.Enabled = false;
+			MovieButton.Enabled = false;
+		}
+
+		private void EnableAllButtons()
+		{
+			NewImageButton.Enabled = true;
+			NextFrameButton.Enabled = true;
+			InverseButton.Enabled = true;
+			if (_jazzImage != null)
+			{
+				VoteUpButton.Enabled = true;
+				VoteDownButton.Enabled = true;
+			}
+			SaveButton.Enabled = true;
+			SaveBunchButton.Enabled = true;
+			MovieButton.Enabled = true;
 		}
 	}
 }

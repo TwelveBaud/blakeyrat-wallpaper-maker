@@ -12,7 +12,7 @@ namespace PicMaker
 	class PicMaker
 	{
 		// Consts
-		const int MAX_THREAD_NUMBER = 8;
+		const int MAX_THREAD_NUMBER = 3;
 
 		// Structs
 		public struct Nexus

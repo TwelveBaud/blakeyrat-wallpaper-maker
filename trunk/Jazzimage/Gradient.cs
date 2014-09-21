@@ -9,7 +9,7 @@ namespace Jazzimage
 {
 	class Gradient
 	{
-		private SortedDictionary<double, Color> m_segments = new SortedDictionary<double, Color>();
+		private SortedDictionary<double, DoubleColor> _segments = new SortedDictionary<double, DoubleColor>();
 
 		/// <summary>
 		/// Generate a random gradient
@@ -17,27 +17,27 @@ namespace Jazzimage
 		public Gradient()
 		{
 			// Add beginning and end points
-			m_segments.Add(0.0, GetRandomColor());
-			m_segments.Add(1.0, GetRandomColor());
+			_segments.Add(0.0, DoubleColor.GetRandomColorAlpha());
+			_segments.Add(1.0, DoubleColor.GetRandomColorAlpha());
 
 			// Determine number of intermediate points
-			int loops = 1;
-			double loopVal = RandomNumberProvider.GetDouble();
+			var loops = 1;
+			var loopVal = RandomNumberProvider.GetDouble();
 
 			while (loopVal < (0.75 / loops))
 			{
-				double newSegmentIndex = RandomNumberProvider.GetDouble();
+				var newSegmentIndex = RandomNumberProvider.GetDouble();
 
-				if (!m_segments.ContainsKey(newSegmentIndex))
+				if (!_segments.ContainsKey(newSegmentIndex))
 				{
-					m_segments.Add(newSegmentIndex, GetRandomColor());
+					_segments.Add(newSegmentIndex, DoubleColor.GetRandomColorAlpha());
 				}
 
 				loops++;
 			}
 		}
 
-		public Color GetColorAtValue(double value)
+		public DoubleColor GetColorAtValue(double value)
 		{
 			if (value < 0)
 			{
@@ -49,52 +49,27 @@ namespace Jazzimage
 				value = 1.0;
 			}
 
-			for (int i = 1; i < m_segments.Count; i++)
+			for (int i = 1; i < _segments.Count; i++)
 			{
-				if (m_segments.ElementAt(i).Key > value)
+				if (_segments.ElementAt(i).Key > value)
 				{
-					double firstNum = m_segments.ElementAt(i - 1).Key;
-					Color firstColor = m_segments.ElementAt(i - 1).Value;
-					double secondNum = m_segments.ElementAt(i).Key;
-					Color secondColor = m_segments.ElementAt(i).Value;
+					var firstNum = _segments.ElementAt(i - 1).Key;
+					var firstColor = _segments.ElementAt(i - 1).Value;
+					var secondNum = _segments.ElementAt(i).Key;
+					var secondColor = _segments.ElementAt(i).Value;
 
-					double split = (value - firstNum) / (secondNum - firstNum);
+					var split = (value - firstNum) / (secondNum - firstNum);
 
-					double r = (Convert.ToDouble(firstColor.R) * (1 - split)) + (Convert.ToDouble(secondColor.R) * split);
-					double g = (Convert.ToDouble(firstColor.G) * (1 - split)) + (Convert.ToDouble(secondColor.G) * split);
-					double b = (Convert.ToDouble(firstColor.B) * (1 - split)) + (Convert.ToDouble(secondColor.B) * split);
+					var r = (firstColor.R * (1 - split)) + (secondColor.R * split);
+					var g = (firstColor.G * (1 - split)) + (secondColor.G * split);
+					var b = (firstColor.B * (1 - split)) + (secondColor.B * split);
+					var a = (firstColor.A * (1 - split)) + (secondColor.A * split);
 
-					return ColorUtils.CapColor(255, Convert.ToInt32(r), Convert.ToInt32(g), Convert.ToInt32(b));
+					return new DoubleColor(r, g, b, a);
 				}
 			}
 
-			return (m_segments[1.0]);
-		}
-
-		/// <summary>
-		/// Generate a random RGB color
-		/// </summary>
-		/// <returns></returns>
-		private Color GetRandomColor()
-		{
-			if (RandomNumberProvider.GetDouble() < 0.33333333)
-			{
-				if (RandomNumberProvider.GetDouble() < 0.33333333)
-				{
-					if (RandomNumberProvider.GetDouble() < 0.5)
-					{
-						return (Color.White);
-					}
-					else
-					{
-						return (Color.Black);
-					}
-				}
-				int value = RandomNumberProvider.GetInt(256);
-				return (Color.FromArgb(value, value, value));
-			}
-
-			return (Color.FromArgb(RandomNumberProvider.GetInt(256), RandomNumberProvider.GetInt(256), RandomNumberProvider.GetInt(256)));
+			return (_segments[1.0]);
 		}
 	}
 }
