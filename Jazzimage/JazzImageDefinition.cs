@@ -50,11 +50,13 @@ namespace Jazzimage
 			_height = height;
 		}
 
-		public void NextFrame()
+		public void NextFrame(int numberOfFrames)
 		{
+			double increment = 1.0 / Convert.ToDouble(numberOfFrames);
+
 			for (int i = 0; i < _transforms.Count; i++)
 			{
-				_transforms[i].NextFrame(0.001);
+				_transforms[i].NextFrame(increment);
 			}
 		}
 
@@ -227,11 +229,13 @@ namespace Jazzimage
 		public int Width
 		{
 			get { return _width; }
+			set { _width = value; }
 		}
 
 		public int Height
 		{
 			get { return _height; }
+			set { _height = value; }
 		}
 	}
 }

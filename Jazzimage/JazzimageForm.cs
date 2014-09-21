@@ -38,22 +38,27 @@ namespace Jazzimage
 
 		private void NextFrameButton_Click(object sender, EventArgs e)
 		{
-			_jazzImage.NextFrame();
+			int numberFrames = Convert.ToInt32(FrameNumsField.Text);
+
+			_jazzImage.NextFrame(numberFrames);
 
 			RenderPicture.Image = _jazzImage.GetResultingImageThreaded();
 		}
 
 		private void MovieButton_Click(object sender, EventArgs e)
 		{
-			//int frameNum = 0;
+			int numberFrames = Convert.ToInt32(FrameNumsField.Text);
 
-			//while (true)
-			//{
-			//    frameNum++;
-			//    _jazzImage.NextFrame();
-			//    Image frame = _jazzImage.GetResultingImageThreaded();
-			//    frame.Save( "frame_" + FormatInt(frameNum) + ".png", System.Drawing.Imaging.ImageFormat.Png);
-			//}
+			_jazzImage.Height = 1080;
+			_jazzImage.Width = 1920;
+			
+			for( int i = 0; i < numberFrames; i++)
+			{
+				_jazzImage.NextFrame(300);
+				Image frame = _jazzImage.GetResultingImageThreaded();
+				RenderPicture.Image = frame;
+				frame.Save("frame_" + FormatInt(i) + ".png", System.Drawing.Imaging.ImageFormat.Png);
+			}
 		}
 
 		private string FormatInt(int a)
